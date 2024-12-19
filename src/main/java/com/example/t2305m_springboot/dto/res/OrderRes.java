@@ -1,12 +1,13 @@
-package com.example.t2305m_springboot.dto.req;
+package com.example.t2305m_springboot.dto.res;
+
+import com.example.t2305m_springboot.dto.req.OrderItemReq;
 
 import java.util.List;
 
-public class OrderReq {
+public class OrderRes {
     private List<OrderItemReq> items;
     private String shippingAddress;
     private String telephone;
-
 
     public List<OrderItemReq> getItems() {
         return items;
@@ -31,6 +32,4 @@ public class OrderReq {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-
-
 }

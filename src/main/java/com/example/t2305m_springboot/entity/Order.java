@@ -20,9 +20,17 @@ public class Order {
     @Column(name = "shipping_address")
     private String shippingAddress;
     private String telephone;
+    private String cancelReason;
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items;
 
+    public String getCancelReason() {
+        return cancelReason;
+    }
+
+    public void setCancelReason(String cancelReason) {
+        this.cancelReason = cancelReason;
+    }
 //    @ManyToMany(fetch = FetchType.LAZY)
 //    @JoinTable(
 //            name = "order_items",

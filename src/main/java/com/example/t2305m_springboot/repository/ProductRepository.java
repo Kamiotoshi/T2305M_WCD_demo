@@ -1,5 +1,6 @@
 package com.example.t2305m_springboot.repository;
 
+import com.example.t2305m_springboot.dto.res.CategoryRes;
 import com.example.t2305m_springboot.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,4 +21,11 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     )
     List<Product> filter(@Param("name") String name,@Param("minPrice") Double minPrice,
                          @Param("maxPrice") Double maxPrice);
+    @Query("SELECT p FROM Product p ORDER BY p.soldQty DESC LIMIT 1")
+    Product findBestSellingProduct();
+
+    @Query("SELECT new com.example.t2305m_springboot.dto.res.CategoryRes(c.id, c.name, SUM(p.price * p.soldQty)) " +
+            "FROM Product p JOIN p.category c GROUP BY c.id ORDER BY SUM(p.price * p.soldQty) DESC")
+    CategoryRes findHighestRevenueCategory();
+
 }
